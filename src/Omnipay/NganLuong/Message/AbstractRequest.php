@@ -9,8 +9,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
     const API_VERSION = '85.0';
 
-    protected $liveEndpoint = 'https://api-3t.paypal.com/nvp';
-    protected $testEndpoint = 'https://api-3t.sandbox.paypal.com/nvp';
+    protected $liveEndpoint = 'https://www.nganluong.vn/micro_checkout_api.php?wsdl';
+    protected $testEndpoint = 'http://beta.nganluong.vn/micro_checkout_api.php?wsdl';
 
     public function getUsername()
     {

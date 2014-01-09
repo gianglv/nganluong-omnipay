@@ -1,10 +1,10 @@
 <?php
 
-namespace Omnipay\PayPal;
+namespace Omnipay\NganLuong;
 
-use Omnipay\PayPal\Message\ExpressAuthorizeRequest;
-use Omnipay\PayPal\Message\ExpressCompleteAuthorizeRequest;
-use Omnipay\PayPal\Message\ExpressCompletePurchaseRequest;
+use Omnipay\NganLuong\Message\ExpressAuthorizeRequest;
+use Omnipay\NganLuong\Message\ExpressCompleteAuthorizeRequest;
+use Omnipay\NganLuong\Message\ExpressCompletePurchaseRequest;
 
 /**
  * PayPal Express Class
@@ -13,7 +13,7 @@ class ExpressGateway extends ProGateway
 {
     public function getName()
     {
-        return 'PayPal Express';
+        return 'NganLuong Express';
     }
 
     public function getDefaultParameters()
@@ -67,7 +67,7 @@ class ExpressGateway extends ProGateway
 
     public function authorize(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\PayPal\Message\ExpressAuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\NganLuong\Message\ExpressAuthorizeRequest', $parameters);
     }
 
     public function completeAuthorize(array $parameters = array())
