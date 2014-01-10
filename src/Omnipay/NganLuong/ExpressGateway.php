@@ -2,14 +2,15 @@
 
 namespace Omnipay\NganLuong;
 
+use Omnipay\Common\AbstractGateway;
 use Omnipay\NganLuong\Message\ExpressAuthorizeRequest;
 use Omnipay\NganLuong\Message\ExpressCompleteAuthorizeRequest;
 use Omnipay\NganLuong\Message\ExpressCompletePurchaseRequest;
 
 /**
- * PayPal Express Class
+ * NganLuong Express Class
  */
-class ExpressGateway extends ProGateway
+class ExpressGateway extends AbstractGateway
 {
     public function getName()
     {
@@ -26,6 +27,23 @@ class ExpressGateway extends ProGateway
         return $settings;
     }
 
+    public function getMerchantSiteCode() {
+    	return $this->getParameter('merchantSiteCode');
+    }
+    
+    public function setMerchantSiteCode($value) {
+    	return $this->setParameter('merchantSiteCode', $value);
+    }
+    
+    public function getMerchantPassword() {
+    	return $this->getParameter('merchantPassword');
+    }
+    
+    public function setMerchantPassword($value) {
+    	return $this->setParameter('merchantPassword', $value);
+    }
+    
+    
     public function getSolutionType()
     {
         return $this->getParameter('solutionType');
@@ -72,7 +90,7 @@ class ExpressGateway extends ProGateway
 
     public function completeAuthorize(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\PayPal\Message\ExpressCompleteAuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\NganLuong\Message\ExpressCompleteAuthorizeRequest', $parameters);
     }
 
     public function purchase(array $parameters = array())
@@ -82,6 +100,6 @@ class ExpressGateway extends ProGateway
 
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\PayPal\Message\ExpressCompletePurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\NganLuong\Message\ExpressCompletePurchaseRequest', $parameters);
     }
 }
