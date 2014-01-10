@@ -1,9 +1,9 @@
 <?php
 
-namespace Omnipay\PayPal\Message;
+namespace Omnipay\NganLuong\Message;
 
 /**
- * PayPal Abstract Request
+ * NganLuong Abstract Request
  */
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
@@ -12,36 +12,22 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected $liveEndpoint = 'https://www.nganluong.vn/micro_checkout_api.php?wsdl';
     protected $testEndpoint = 'http://beta.nganluong.vn/micro_checkout_api.php?wsdl';
 
-    public function getUsername()
-    {
-        return $this->getParameter('username');
+    public function getMerchantSiteCode() {
+    	return $this->getParameter('merchantSiteCode');
     }
-
-    public function setUsername($value)
-    {
-        return $this->setParameter('username', $value);
+    
+    public function setMerchantSiteCode($value) {
+    	return $this->setParameter('merchantSiteCode', $value);
     }
-
-    public function getPassword()
-    {
-        return $this->getParameter('password');
+    
+    public function getMerchantPassword() {
+    	return $this->getParameter('merchantPassword');
     }
-
-    public function setPassword($value)
-    {
-        return $this->setParameter('password', $value);
+    
+    public function setMerchantPassword($value) {
+    	return $this->setParameter('merchantPassword', $value);
     }
-
-    public function getSignature()
-    {
-        return $this->getParameter('signature');
-    }
-
-    public function setSignature($value)
-    {
-        return $this->setParameter('signature', $value);
-    }
-
+    
     public function getSubject()
     {
         return $this->getParameter('subject');
@@ -105,12 +91,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected function getBaseData($method)
     {
         $data = array();
-        $data['METHOD'] = $method;
-        $data['VERSION'] = static::API_VERSION;
-        $data['USER'] = $this->getUsername();
-        $data['PWD'] = $this->getPassword();
-        $data['SIGNATURE'] = $this->getSignature();
-        $data['SUBJECT'] = $this->getSubject();
+        $data['operation'] = $method;
+        $data['merchant_side_code'] = $this->getMerchantSiteCode();
+        $data['merchant_password'] = $this->getMerchantPassword();
 
         return $data;
     }
