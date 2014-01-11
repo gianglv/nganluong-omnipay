@@ -28,6 +28,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     	return $this->setParameter('merchantPassword', $value);
     }
     
+    public function getReceiver() {
+    	return $this->getParameter('receiver');
+    }
+    
+    public function setReceiver($value) {
+    	return $this->setParameter('receiver', $value);
+    }
+    
     public function getSubject()
     {
         return $this->getParameter('subject');

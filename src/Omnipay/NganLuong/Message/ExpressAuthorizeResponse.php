@@ -1,16 +1,16 @@
 <?php
 
-namespace Omnipay\PayPal\Message;
+namespace Omnipay\NganLuong\Message;
 
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
- * PayPal Express Authorize Response
+ * NganLuong Express Authorize Response
  */
 class ExpressAuthorizeResponse extends Response implements RedirectResponseInterface
 {
-    protected $liveCheckoutEndpoint = 'https://www.paypal.com/webscr';
-    protected $testCheckoutEndpoint = 'https://www.sandbox.paypal.com/webscr';
+    protected $liveCheckoutEndpoint = '';
+    protected $testCheckoutEndpoint = '';
 
     public function isSuccessful()
     {
@@ -19,23 +19,17 @@ class ExpressAuthorizeResponse extends Response implements RedirectResponseInter
 
     public function isRedirect()
     {
-        return isset($this->data['ACK']) && in_array($this->data['ACK'], array('Success', 'SuccessWithWarning'));
+        return isset($this->data['result_code']) && in_array($this->data['result_code'], array('00'));
     }
 
     public function getRedirectUrl()
     {
-        return $this->getCheckoutEndpoint().'?'.http_build_query(
-            array(
-                'cmd' => '_express-checkout',
-                'useraction' => 'commit',
-                'token' => $this->getTransactionReference(),
-            )
-        );
+        return $this->getCheckoutEndpoint();
     }
 
     public function getTransactionReference()
     {
-        return isset($this->data['TOKEN']) ? $this->data['TOKEN'] : null;
+        return isset($this->data['token']) ? $this->data['token'] : null;
     }
 
     public function getRedirectMethod()
@@ -50,6 +44,6 @@ class ExpressAuthorizeResponse extends Response implements RedirectResponseInter
 
     protected function getCheckoutEndpoint()
     {
-        return $this->getRequest()->getTestMode() ? $this->testCheckoutEndpoint : $this->liveCheckoutEndpoint;
+        return $this->data['link_checkout'];
     }
 }

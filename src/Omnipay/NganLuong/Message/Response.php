@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\PayPal\Message;
+namespace Omnipay\NganLuong\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
