@@ -2,6 +2,7 @@
 
 namespace Omnipay\NganLuong\Message;
 
+use SoapClient;
 /**
  * NganLuong Abstract Request
  */
@@ -110,7 +111,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         $url = $this->getEndpoint().'?'.http_build_query($data);
         $httpResponse = $this->httpClient->get($url)->send();
-
+        
+        $soapClient = new SoapClient($this->getEndPoint());
+		$soapClient->__soapCall($this->getOperation(), $params);
         return $this->createResponse($httpResponse->getBody());
     }
 
